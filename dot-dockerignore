@@ -1,0 +1,7 @@
+node_modules/
+*.env 
+*.log
+/Cache/
+*.db
+Dockerifile.
+north_ports.json
