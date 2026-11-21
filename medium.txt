@@ -1,1 +1,0 @@
-This is a medium sized file to test the limit of the file upload api. It contains more content than the small file but less than the larger files that failed.

@@ -1,13 +1,13 @@
 services:
   - type: web
     name: bitchord-local-lossless
-    runtime: node
-    repo: https://github.com/Y_OUR_USERNAME/bitchord-local-lossless
-    branch: main
-    buildCommand: npm ci
-    startCommand: node server.js
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
     envVars:
-      - key: NOD_ENV
+      - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
@@ -15,28 +15,16 @@ services:
         value: /music
       - key: CACHE_DIR
         value: /cache
-      - key: PUBLIC_URL
-        value: https://bitchord-local-lossless.onrender.com
-      - key: ADDON_ID
-        value: com.yourname.bitchord-local
-      - key: ADDON_NAME
-        value: My Local Lossless Library
-      - key: ALLOW_DOWNLOADS
-        value: "true"
-      - key: TRANSCODE_ENABLEd
+      - key: TRANSCODE_ENABLED
         value: "true"
       - key: WATCH_ENABLED
-        value: "false" # Render filesystem is ephemeral
-
-    disk:
+        value: "false" # Render mounts a persistent disk, watching does not survive restarts
+      - key: ACCESS_TOKEN
+        generateValue: true
+    disks:
       - name: music
-        mountPatj : /music
+        mountPath: /music
         sizeGB: 10
       - name: cache
         mountPath: /cache
         sizeGB: 2
-       healthCheckPath: /health
-       autoDeploy:true
-    previewEnvVars:
-      - key: PUBLIC_URL
-        value: https://\{service.name}.onrender.com

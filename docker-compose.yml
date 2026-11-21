@@ -1,0 +1,19 @@
+services:
+  bitchord:
+    build: .
+    container_name: bitchord-local-lossless
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      MUSIC_DIR: /music
+      CACHE_DIR: /cache
+      TRANSCODE_ENABLED: "true"
+      WATCH_ENABLED: "true"
+      ALLOW_DOWNLOADS: "true"
+      # PUBLIC_URL: https://your-tunnel.example.com
+      # ACCESS_TOKEN: change-me
+    volumes:
+      - ./music:/music:ro
+      - ./cache:/cache
