@@ -1,0 +1,36 @@
+{
+  "name": "bitchord-local-lossless",
+  "version": "1.0.0",
+  "description": "Local lossless music server for BitChord - optimized for aptH Lossless + UGREEN 40759 + Popcorn Bass X5 Pro",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "scan": "node -e \"import('./server.js').then(m=>m.scanLibrary(true))\"",
+    "docker:build": "docker build -t bitchord-local-lossless .",
+    "docker:run": "docker-compose up -d",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop bitchord-local-lossless",
+    "pm2:logs": "pm2 logs bitchord-local-lossless"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.2.0",
+    "better-sqlite3": "^9.4.3",
+    "music-metadata": "^10.6.0",
+    "chokidar": "^3.6.0",
+    "mime-types": "^2.1.35",
+    "range-parser": "^1.2.1",
+    "process": "^0.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": { "node": ">=20.0.0" },
+  "keywords": ["bandwidth", "lossless", "flac", "aptx", "bitchord", "ugreen", "popcorn", "xi8Pro"],
+  "license": "GPL-3.0"
+}
